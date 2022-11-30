@@ -9,8 +9,8 @@ RSpec.describe 'leagues index' do
 # Then I see the name of each parent record in the system
 
   it 'displays the name of each league' do
-    league1 = League.create(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
-    league2 = League.create(name: 'MLS', level: 1, country: 'USA', relegation: false)
+    league1 = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    league2 = League.create!(name: 'MLS', level: 1, country: 'USA', relegation: false)
 
     visit '/leagues'
 

@@ -243,6 +243,7 @@
           1,
           null,
           1,
+          1,
           null
         ]
       },
@@ -250,11 +251,6 @@
         "lines": [
           1,
           null
-        ]
-      },
-      "/Users/alastair/Documents/turing/m2/projects/relational_rails/spec/features/leagues/show_spec.rb": {
-        "lines": [
-
         ]
       },
       "/Users/alastair/Documents/turing/m2/projects/relational_rails/app/models/league.rb": {
@@ -274,6 +270,10 @@
         "lines": [
           1,
           1,
+          0,
+          null,
+          null,
+          1,
           1,
           null,
           null
@@ -286,6 +286,6 @@
         ]
       }
     },
-    "timestamp": 1669846648
+    "timestamp": 1669849813
   }
 }
