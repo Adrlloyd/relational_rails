@@ -50,7 +50,7 @@ RSpec.describe 'clubs index' do
     club2 = league.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
 
     visit '/clubs'
-    save_and_open_page
+    
     expect(page).to have_content(club1.previous_winner)
     expect(page).to have_content(club2.previous_winner)
     expect(page).to_not have_content(league.country)
