@@ -1,0 +1,10 @@
+<h1><%= @league.name %></h1>
+<br>
+<% @clubs.each do |club| %>
+  <p>
+  Name: <%= club.name %><br>
+  Position: <%= club.position %><br>
+  City: <%= club.city %><br>
+  Previous Winner: <%= club.previous_winner %>
+  </p>
+<% end %>
