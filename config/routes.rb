@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   get '/leagues/:id', to: 'leagues#show'
   get '/clubs', to: 'clubs#index'
   get '/clubs/:id', to: 'clubs#show'
-  get '/leagues/:id/clubs', to: 'league_clubs#index'
+  get '/leagues/:league_id/clubs', to: 'league_clubs#index'
 end
