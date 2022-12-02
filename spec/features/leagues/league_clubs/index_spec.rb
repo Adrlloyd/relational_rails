@@ -14,7 +14,7 @@ RSpec.describe 'league_clubs index' do
     club1 = league1.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
     club2 = league1.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
     club3 = league2.clubs.create!(name: 'Colorado Rapids', position: 1, city: 'Denver', previous_winner: true)
-    binding.pry
+    
     visit "/leagues/#{league1.id}/clubs"
     
     expect(page).to have_content(club1.name)
