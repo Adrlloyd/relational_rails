@@ -35,4 +35,22 @@ RSpec.describe 'leagues index' do
     expect(page).to have_content(league1.name)
     expect(page).to have_content(league2.name)
   end
+
+# User Story 9, Parent Index Link
+
+# As a visitor
+# When I visit any page on the site
+# Then I see a link at the top of the page that takes me to the Parent Index
+  it 'has a link on every page to the Leagues index' do
+    league = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    league2 = League.create!(name: 'MLS', level: 1, country: 'USA', relegation: false)
+    club1 = league.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
+    club2 = league.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+
+    visit '/clubs'
+    
+    expect(page).to have_link("Leagues Index")
+    click_link("Leagues Index")
+    expect(current_path).to eq("/leagues")
+  end
 end
