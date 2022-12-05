@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'league_clubs index' do 
-  # User Story 5, Parent Children Index 
+  # User Story 10, Parent Children Index 
 
   # As a visitor
   # When I visit '/parents/:parent_id/child_table_name'

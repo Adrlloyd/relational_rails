@@ -18,4 +18,18 @@ class LeaguesController < ApplicationController
         relegation: params[:relegation]})
     redirect_to "/leagues"
   end
+
+  def edit
+    @league = League.find(params[:id])
+  end
+
+  def update
+    league = League.find(params[:id])
+    league.update({
+      name: params[:name],
+      level: params[:level],
+      country: params[:country],
+      relegation: params[:relegation]})
+      redirect_to "/leagues/#{league.id}"
+  end
 end

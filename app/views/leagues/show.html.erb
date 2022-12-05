@@ -9,3 +9,4 @@
 <p>Number of Clubs: <%= @league.clubs_count %></p>
 </br>
 <a href="/leagues/<%= @league.id %>/clubs">Clubs</a>
+<%= link_to "Update League", "/leagues/#{@league.id}/edit" %>
