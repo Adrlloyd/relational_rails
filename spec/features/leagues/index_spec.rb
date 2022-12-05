@@ -53,4 +53,36 @@ RSpec.describe 'leagues index' do
     click_link("Leagues Index")
     expect(current_path).to eq("/leagues")
   end
+
+# User Story 11, Parent Creation 
+
+# As a visitor
+# When I visit the Parent Index page
+# Then I see a link to create a new Parent record, "New Parent"
+# When I click this link
+# Then I am taken to '/parents/new' where I  see a form for a new parent record
+# When I fill out the form with a new parent's attributes:
+# And I click the button "Create Parent" to submit the form
+# Then a `POST` request is sent to the '/parents' route,
+# a new parent record is created,
+# and I am redirected to the Parent Index page where I see the new Parent displayed.
+  it 'can create a new League' do
+    league = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    club1 = league.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
+    club2 = league.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+
+    visit '/leagues'
+
+    expect(page).to have_link("New League")
+    click_link("New League")
+    expect(current_path).to eq("/leagues/new")
+
+    fill_in :name, with: "MLS"
+    fill_in :level, with: 1
+    fill_in :country, with: "USA"
+    select "false", :from => "relegation"
+
+    click_button("Submit")
+    expect(current_path).to eq("/leagues")
+  end
 end

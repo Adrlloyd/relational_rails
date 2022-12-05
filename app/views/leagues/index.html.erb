@@ -1,7 +1,9 @@
-<a href="/clubs">Clubs Index</a>
+<a href="/leagues">Leagues Index</a><br><a href="/clubs">Clubs Index</a>
 
 <h1>Leagues</h1>
 
 <% @leagues.each do |league| %>
   <p><%= league.name %></p>
 <% end %>
+
+<a href="/leagues/new">New League</a>

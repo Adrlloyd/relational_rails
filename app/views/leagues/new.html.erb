@@ -1,0 +1,25 @@
+<form action="/leagues" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>Enter your new league:
+  <p>League Name:
+  <input type="text" name="name"/><br/>
+  </p>
+
+  <p>What level is the league?
+  <input type="integer" name="level">
+  </p>
+
+  <p>What country is the league in?
+  <input type="text" name="country">
+  </p>
+
+  <p>Does it have relegation?
+  <select id="relegation" name="relegation">
+    <option value="pick one">pick one below</option>
+    <option value=true>true</option>
+    <option value=false>false</option>
+  </select>
+  </p>
+
+  <input type='submit' name="Submit"/>
+</form>
