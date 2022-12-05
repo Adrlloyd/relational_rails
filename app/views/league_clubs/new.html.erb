@@ -1,0 +1,11 @@
+<%= form_with url: "/leagues/#{@league.id}/clubs", method: :post, local: true do |form| %>
+  <p><%= form.label :name %>
+  <%= form.text_field :name %></p>
+  <p><%= form.label :position %>
+  <%= form.text_field :position %></p>
+  <p><%= form.label :city%>
+  <%= form.number_field :city %></p>
+  <p><%= form.label :previous_winner? %>
+  <%= form.select :previous_winner, ['pick one below', 'true', 'false'] %></p>
+  <%= form.submit "Create club"%>
+<% end %>

@@ -1,0 +1,11 @@
+<%= form_with url: "/leagues/#{@league.id}", method: :patch, local: true do |form| %>
+  <p><%= form.label :name %>
+  <%= form.text_field :name %></p>
+  <p><%= form.label :level%>
+  <%= form.number_field :level %></p>
+  <p><%= form.label :country %>
+  <%= form.text_field :country %></p>
+  <p><%= form.label :relegation? %>
+  <%= form.select :relegation, ['pick one below', 'true', 'false'] %></p>
+  <%= form.submit "Submit"%>
+<% end %>
