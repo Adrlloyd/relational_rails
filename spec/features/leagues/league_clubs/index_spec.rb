@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'league_clubs index' do 
-  # User Story 5, Parent Children Index 
+  # User Story 10, Parent Children Index 
 
   # As a visitor
   # When I visit '/parents/:parent_id/child_table_name'
@@ -34,5 +34,39 @@ RSpec.describe 'league_clubs index' do
     expect(page).to have_content(club3.city)
     expect(page).to have_content(club3.previous_winner)
     expect(page).to_not have_content(club1.name)
+  end
+
+# User Story 13, Parent Child Creation 
+
+# As a visitor
+# When I visit a Parent Children Index page
+# Then I see a link to add a new adoptable child for that parent "Create Child"
+# When I click the link
+# I am taken to '/parents/:parent_id/child_table_name/new' where I see a form to add a new adoptable child
+# When I fill in the form with the child's attributes:
+# And I click the button "Create Child"
+# Then a `POST` request is sent to '/parents/:parent_id/child_table_name',
+# a new child object/row is created for that parent,
+# and I am redirected to the Parent Childs Index page where I can see the new child listed
+
+  it 'can create a new club for the specific league' do
+    league1 = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    club1 = league1.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
+    club2 = league1.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+
+    visit "/leagues/#{league1.id}/clubs"
+
+    expect(page).to have_link("Create new club")
+    click_link("Create new club")
+    expect(current_path).to eq("/leagues/#{league1.id}/clubs/new")
+
+    fill_in :name, with: "AC Milan"
+    fill_in :position, with: 3
+    fill_in :city, with: "Milan"
+    select "true", :from => "previous_winner"
+
+    click_button('Create club')
+    expect(current_path).to eq("/leagues/#{league1.id}/clubs")
+    expect(page).to have_content("AC Milan")
   end
 end
