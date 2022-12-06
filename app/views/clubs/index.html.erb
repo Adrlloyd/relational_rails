@@ -7,5 +7,6 @@ Position: <%= club.position %><br>
 City: <%= club.city %><br>
 Previous Winner: <%= club.previous_winner %><br>
 <%= link_to "Edit", "/clubs/#{club.id}/edit" %><br>
+<%= link_to "Delete", "/clubs/#{club.id}", method: :delete %>
 </p>
 <% end %>
