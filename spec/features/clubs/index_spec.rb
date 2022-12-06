@@ -111,4 +111,24 @@ RSpec.describe 'clubs index' do
     first(:link, "Edit").click
     expect(current_path).to eq("/clubs/#{club1.id}/edit")
   end
+
+# User Story 23, Child Delete From Childs Index Page 
+
+# As a visitor
+# When I visit the `child_table_name` index page or a parent `child_table_name` index page
+# Next to every child, I see a link to delete that child
+# When I click the link
+# I should be taken to the `child_table_name` index page where I no longer see that child
+it 'has a link to delete each club' do
+  league = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+  club1 = league.clubs.create!(name: 'ASRoma', position: 1, city: 'Rom', previous_winner: true)
+  club2 = league.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+  club3 = league.clubs.create!(name: 'AC Monza', position: 13, city: 'Monza', previous_winner: false)
+
+  visit "/clubs"
+  
+  expect(page).to have_link("Delete")
+  first(:link, "Delete").click
+  expect(current_path).to eq("/clubs")
+  end
 end

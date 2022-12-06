@@ -15,4 +15,7 @@ Rails.application.routes.draw do
 
   patch '/leagues/:id', to: 'leagues#update'
   patch '/clubs/:id', to: 'clubs#update'
+
+  delete '/leagues/:id', to: 'leagues#destroy'
+  delete '/clubs/:id', to: 'clubs#destroy'
 end

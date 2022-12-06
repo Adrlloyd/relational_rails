@@ -32,4 +32,9 @@ class LeaguesController < ApplicationController
       relegation: params[:relegation]})
       redirect_to "/leagues/#{league.id}"
   end
+
+  def destroy
+    League.destroy(params[:id])
+    redirect_to "/leagues"
+  end
 end

@@ -53,4 +53,28 @@ RSpec.describe 'clubs show page' do
     expect(page).to have_content("AS Roma")
     expect(page).to have_content("Rome")
   end
+
+# User Story 20, Child Delete 
+
+# As a visitor
+# When I visit a child show page
+# Then I see a link to delete the child "Delete Child"
+# When I click the link
+# Then a 'DELETE' request is sent to '/child_table_name/:id',
+# the child is deleted,
+# and I am redirected to the child index page where I no longer see this child.
+  it 'has a link to delete the club' do
+    league = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    club1 = league.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
+    club2 = league.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+
+    visit "/clubs/#{club2.id}"
+
+    expect(page).to have_link("Delete club")
+    click_link("Delete club")
+    expect(current_path).to eq("/clubs")
+
+    expect(page).to have_content(club1.name)
+    expect(page).to_not have_content(club2.name)
+  end
 end

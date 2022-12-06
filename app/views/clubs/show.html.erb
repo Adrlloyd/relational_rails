@@ -6,3 +6,4 @@
 <p> Previous Winner: <%= @club.previous_winner %></p>
 <p>
 <%= link_to "Update club", "/clubs/#{@club.id}/edit" %> <br>
+<%= link_to "Delete club", "/clubs/#{@club.id}", method: :delete %>

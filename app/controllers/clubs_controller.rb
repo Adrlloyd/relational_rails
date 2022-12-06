@@ -9,9 +9,9 @@ class ClubsController < ApplicationController
 
   def edit
     @club = Club.find(params[:id])
-end
+  end
 
-def update 
+  def update 
     club = Club.find(params[:id])
     club.update({
         name: params[:name],
@@ -19,5 +19,10 @@ def update
         city: params[:city],
         previous_winner: params[:previous_winner]})
     redirect_to "/clubs/#{club.id}"
-end
+  end
+
+  def destroy
+    Club.destroy(params[:id])
+    redirect_to "/clubs"
+  end
 end

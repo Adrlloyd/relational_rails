@@ -2,7 +2,7 @@
 
 <h1><%= @league.name %></h1>
 <br>
-<%= link_to "Sort Alphabetically", :sort => :name %>
+
 <% @clubs.each do |club| %>
   <p>
   Name: <%= club.name %><br>
@@ -12,4 +12,10 @@
   <%= link_to "Edit", "/clubs/#{club.id}/edit" %><br>
   </p>
 <% end %>
+<%= link_to "Sort Alphabetically", :sort => :name %>
 <a href="/leagues/<%= @league.id %>/clubs/new">Create new club</a>
+<%= form_with url: "/leagues/#{@league.id}/clubs", method: :get, local: true do |form| %>
+  <%= form.label :position, "Current league position greater than" %>
+  <%= form.number_field :position, :value => 0 %>
+  <%= form.submit "Submit" %>
+<% end %>

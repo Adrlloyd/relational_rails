@@ -10,3 +10,4 @@
 </br>
 <a href="/leagues/<%= @league.id %>/clubs">Clubs</a>
 <%= link_to "Update League", "/leagues/#{@league.id}/edit" %>
+<%= link_to "Delete league", "/leagues/#{@league.id}", method: :delete %>
