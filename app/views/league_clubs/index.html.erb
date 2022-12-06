@@ -2,6 +2,7 @@
 
 <h1><%= @league.name %></h1>
 <br>
+<%= link_to "Sort Alphabetically", :sort => :name %>
 <% @clubs.each do |club| %>
   <p>
   Name: <%= club.name %><br>

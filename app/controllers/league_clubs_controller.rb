@@ -2,6 +2,9 @@ class LeagueClubsController < ApplicationController
   def index
     @league = League.find(params[:league_id])
     @clubs = Club.where(league_id: params[:league_id])
+    if params[:sort]
+      @clubs = Club.sort_alphabetically
+    end
   end
 
   def new

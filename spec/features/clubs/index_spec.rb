@@ -73,4 +73,22 @@ RSpec.describe 'clubs index' do
     click_link("Clubs Index")
     expect(current_path).to eq("/clubs")
   end
+
+# User Story 15, Child Index only shows `true` Records 
+
+# As a visitor
+# When I visit the child index
+# Then I only see records where the boolean column is `true`
+  it 'only shows previous winners = true' do
+    league = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    club1 = league.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
+    club2 = league.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+    club3 = league.clubs.create!(name: 'AC Monza', position: 13, city: 'Monza', previous_winner: false)
+
+    visit "/clubs"
+
+    expect(page).to have_content("AS Roma")
+    expect(page).to have_content("Juventus")
+    expect(page).to_not have_content("AC Monza")
+  end
 end
