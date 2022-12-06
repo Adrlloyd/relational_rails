@@ -69,4 +69,34 @@ RSpec.describe 'league_clubs index' do
     expect(current_path).to eq("/leagues/#{league1.id}/clubs")
     expect(page).to have_content("AC Milan")
   end
+
+# User Story 16, Sort Parent's Children in Alphabetical Order by name 
+
+# As a visitor
+# When I visit the Parent's children Index Page
+# Then I see a link to sort children in alphabetical order
+# When I click on the link
+# I'm taken back to the Parent's children Index Page where I see all of the parent's children in alphabetical order
+  it 'sorts clubs alphabetically when the link is clicked' do
+    league1 = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    club1 = league1.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
+    club2 = league1.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+    club3 = league1.clubs.create!(name: 'AC Monza', position: 13, city: 'Monza', previous_winner: false)
+    club4 = league1.clubs.create!(name: 'Inter Milan', position: 3, city: 'Milan', previous_winner: true)
+
+    visit "/leagues/#{league1.id}/clubs"
+    
+    expect(page).to have_link("Sort Alphabetically")
+    expect(club1.name).to appear_before(club2.name)
+    expect(club2.name).to appear_before(club3.name)
+    expect(club3.name).to appear_before(club4.name)
+    #expecting them to start in created order.
+    
+    click_link("Sort Alphabetically")
+    expect(current_path).to eq("/leagues/#{league1.id}/clubs")
+    
+    expect(club3.name).to appear_before(club1.name)
+    expect(club1.name).to appear_before(club4.name)
+    expect(club4.name).to appear_before(club2.name)
+  end
 end
