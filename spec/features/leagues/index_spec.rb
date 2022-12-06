@@ -106,4 +106,28 @@ RSpec.describe 'leagues index' do
     first(:link, "Edit").click
     expect(current_path).to eq("/leagues/#{league2.id}/edit")
   end
+
+# User Story 22, Parent Delete From Parent Index Page 
+
+# As a visitor
+# When I visit the parent index page
+# Next to every parent, I see a link to delete that parent
+# When I click the link
+# I am returned to the Parent Index Page where I no longer see that parent.
+  it 'has a delete link for every league' do
+    league1 = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    league2 = League.create!(name: 'MLS', level: 1, country: 'USA', relegation: false)
+    club1 = league1.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
+    club2 = league1.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+    club3 = league2.clubs.create!(name: 'Colorado Rapids', position: 2, city: 'Denver', previous_winner: true)
+
+    visit '/leagues'
+
+    expect(page).to have_link("Delete")
+    first(:link, "Delete").click
+    expect(current_path).to eq("/leagues")
+        
+    expect(page).to have_content(league1.name)
+    expect(page).to_not have_content(league2.name)
+  end
 end

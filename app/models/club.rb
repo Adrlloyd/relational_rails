@@ -11,7 +11,6 @@ class Club < ApplicationRecord
 
   def self.league_position(pos_in_league)
     pos_in_league = 0 if pos_in_league.empty?
-
     where("position >= #{pos_in_league}")
   end
 end
