@@ -8,7 +8,8 @@
   Name: <%= club.name %><br>
   Position: <%= club.position %><br>
   City: <%= club.city %><br>
-  Previous Winner: <%= club.previous_winner %>
+  Previous Winner: <%= club.previous_winner %><br>
+  <%= link_to "Edit", "/clubs/#{club.id}/edit" %><br>
   </p>
 <% end %>
 <a href="/leagues/<%= @league.id %>/clubs/new">Create new club</a>

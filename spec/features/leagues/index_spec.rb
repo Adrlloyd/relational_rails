@@ -85,4 +85,25 @@ RSpec.describe 'leagues index' do
     click_button("Submit")
     expect(current_path).to eq("/leagues")
   end
+
+# User Story 17, Parent Update From Parent Index Page 
+
+# As a visitor
+# When I visit the parent index page
+# Next to every parent, I see a link to edit that parent's info
+# When I click the link
+# I should be taken to that parent's edit page where I can update its information just like in User Story 12
+  it 'has a link to edit the league next to each league/name' do
+    league1 = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    league2 = League.create!(name: 'MLS', level: 1, country: 'USA', relegation: false)
+    club1 = league1.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
+    club2 = league1.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+    club3 = league2.clubs.create!(name: 'Colorado Rapids', position: 2, city: 'Denver', previous_winner: true)
+
+    visit '/leagues'
+    
+    expect(page).to have_link("Edit")
+    first(:link, "Edit").click
+    expect(current_path).to eq("/leagues/#{league2.id}/edit")
+  end
 end

@@ -3,7 +3,10 @@
 <h1>Leagues</h1>
 
 <% @leagues.each do |league| %>
-  <p><%= league.name %></p>
+  <p>
+  <%= league.name %> 
+  <%= link_to 'Edit', "/leagues/#{league.id}/edit" %>
+  </p>
 <% end %>
 
 <a href="/leagues/new">New League</a>
