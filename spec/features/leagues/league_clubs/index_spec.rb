@@ -99,4 +99,29 @@ RSpec.describe 'league_clubs index' do
     expect(club1.name).to appear_before(club4.name)
     expect(club4.name).to appear_before(club2.name)
   end
+
+# User Story 21, Display Records Over a Given Threshold 
+
+# As a visitor
+# When I visit the Parent's children Index Page
+# I see a form that allows me to input a number value
+# When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`'
+# Then I am brought back to the current index page with only the records that meet that threshold shown.
+  it 'returns the clubs with a higher league position' do
+    league1 = League.create!(name: 'Serie A', level: 1, country: 'Italy', relegation: true)
+    club1 = league1.clubs.create!(name: 'AS Roma', position: 1, city: 'Rome', previous_winner: true)
+    club2 = league1.clubs.create!(name: 'Juventus', position: 2, city: 'Turin', previous_winner: true)
+    club3 = league1.clubs.create!(name: 'AC Monza', position: 13, city: 'Monza', previous_winner: false)
+    club4 = league1.clubs.create!(name: 'Inter Milan', position: 5, city: 'Milan', previous_winner: true)
+
+    visit "/leagues/#{league1.id}/clubs"
+
+    fill_in :position, with: 4
+    click_button("Submit")
+    expect(current_path).to eq("/leagues/#{league1.id}/clubs")
+
+    expect(page).to have_content(club3.name)
+    expect(page).to_not have_content(club2.name)
+    expect(page).to have_content(club4.name)
+  end
 end

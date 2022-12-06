@@ -5,6 +5,10 @@ class LeagueClubsController < ApplicationController
     if params[:sort]
       @clubs = Club.sort_alphabetically
     end
+
+    if params[:position]
+      @clubs = @clubs.league_position(params[:position])
+    end
   end
 
   def new
