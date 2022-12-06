@@ -6,6 +6,6 @@ class Club < ApplicationRecord
   end
 
   def self.sort_alphabetically
-    Club.order('lower(name)')
+    Club.order(:name)
   end
 end
